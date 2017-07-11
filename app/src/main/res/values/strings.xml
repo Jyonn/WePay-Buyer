@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WePay-Buyer</string>
+    <string name="phone_input_hint">手机号</string>
+    <string name="app_icon">App图标</string>
+    <string name="password_input_hint">密码</string>
+    <string name="login_text">登录</string>
+    <string name="go_to_register">没有账号，点我注册</string>
+</resources>
