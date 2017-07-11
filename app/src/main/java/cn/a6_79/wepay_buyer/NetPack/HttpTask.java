@@ -64,4 +64,3 @@ public class HttpTask {
         return null;
     }
 }
-

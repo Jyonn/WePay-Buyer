@@ -7,6 +7,6 @@ public class HttpTaskResponse {
         this.cookie = cookie;
         this.response = response;
     }
-    String getCookie() { return cookie; }
-    String getResponse() { return response; }
+    public String getCookie() { return cookie; }
+    public String getResponse() { return response; }
 }

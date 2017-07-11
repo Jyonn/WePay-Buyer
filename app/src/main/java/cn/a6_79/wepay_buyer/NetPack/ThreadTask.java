@@ -1,6 +1,7 @@
 package cn.a6_79.wepay_buyer.NetPack;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class ThreadTask extends AsyncTask<Void, Integer, HttpTaskResponse> {
     private OnAsyncTaskListener listener;

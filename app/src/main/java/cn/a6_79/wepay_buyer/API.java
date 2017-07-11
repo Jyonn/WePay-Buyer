@@ -1,16 +1,35 @@
 package cn.a6_79.wepay_buyer;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import cn.a6_79.wepay_buyer.NetPack.HttpTaskRequest;
+import cn.a6_79.wepay_buyer.NetPack.HttpTaskResponse;
 import cn.a6_79.wepay_buyer.NetPack.OnAsyncTaskListener;
 import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
 
 public class API {
-    private static String cookie = null;
+    public static String cookie = null;
     private static ArrayList<APITag> apis = new ArrayList<>();
+
+    private static class CommonListener {
+        OnAsyncTaskListener httpListener;
+        CommonListener(final ResponseListener listener) {
+            httpListener = new OnAsyncTaskListener() {
+                @Override
+                public void callback(HttpTaskResponse httpTaskResponse) {
+                    if (httpTaskResponse.getCookie() != null)
+                        cookie = httpTaskResponse.getCookie();
+                    listener.callback(httpTaskResponse.getResponse());
+                }
+            };
+        }
+    }
 
     static void init() {
         String GET = "GET", POST = "POST", PUT = "PUT", DELETE = "DELETE";
@@ -63,15 +82,17 @@ public class API {
         }
         return null;
     }
-    static ThreadTask receive(int orderId, OnAsyncTaskListener listener) {
+
+    static ThreadTask receive(int orderId, ResponseListener listener) {
         APITag apiTag = find(RECEIVE);
         if (apiTag == null)
             return null;
         String url = apiTag.url.replace("<0>", String.valueOf(orderId));
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask getOrder(String status, int page, int count, OnAsyncTaskListener listener) {
+    static ThreadTask getOrder(String status, int page, int count, ResponseListener listener) {
         APITag apiTag = find(GET_ORDER);
         if (apiTag == null)
             return null;
@@ -79,21 +100,23 @@ public class API {
                 replace("<0>", status).
                 replace("<1>", String.valueOf(page)).
                 replace("<2>", String.valueOf(count));
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask getButton(OnAsyncTaskListener listener) {
+    static ThreadTask getButton(ResponseListener listener) {
         return lazyGet(GET_BUTTON, listener);
     }
-    static ThreadTask deleteButton(int buttonId, OnAsyncTaskListener listener) {
+    static ThreadTask deleteButton(int buttonId, ResponseListener listener) {
         APITag apiTag = find(DELETE_BUTTON);
         if (apiTag == null)
             return null;
         String url = apiTag.url.replace("<0>", String.valueOf(buttonId));
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask editButton(int buttonId, int goodId, int number, OnAsyncTaskListener listener) {
+    static ThreadTask editButton(int buttonId, int goodId, int number, ResponseListener listener) {
         APITag apiTag = find(EDIT_BUTTON);
         if (apiTag == null)
             return null;
@@ -106,10 +129,11 @@ public class API {
             return null;
         }
         String url = apiTag.url.replace("<0>", String.valueOf(buttonId));
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask addButton(int goodId, int number, OnAsyncTaskListener listener) {
+    static ThreadTask addButton(int goodId, int number, ResponseListener listener) {
         APITag apiTag = find(ADD_BUTTON);
         if (apiTag == null)
             return null;
@@ -121,36 +145,39 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask getGoodInCategory(int categoryId, OnAsyncTaskListener listener) {
+    static ThreadTask getGoodInCategory(int categoryId, ResponseListener listener) {
         APITag apiTag = find(GET_GOOD_IN_CATEGORY);
         if (apiTag == null)
             return null;
         String url = apiTag.url.replace("<0>", String.valueOf(categoryId));
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask getCategory(OnAsyncTaskListener listener) {
+    static ThreadTask getCategory(ResponseListener listener) {
         return lazyGet(GET_CATEGORY, listener);
     }
 
-    static ThreadTask getCard(OnAsyncTaskListener listener) {
+    static ThreadTask getCard(ResponseListener listener) {
         return lazyGet(GET_CARD, listener);
     }
 
-    static ThreadTask deleteCard(String cardId, OnAsyncTaskListener listener) {
+    static ThreadTask deleteCard(String cardId, ResponseListener listener) {
         APITag apiTag = find(DELETE_CARD);
         if (apiTag == null)
             return null;
         String url = apiTag.url.replace("<0>", cardId);
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask setDefaultCard(String cardId, OnAsyncTaskListener listener) {
+    static ThreadTask setDefaultCard(String cardId, ResponseListener listener) {
         APITag apiTag = find(SET_DEFAULT_CARD);
         if (apiTag == null)
             return null;
@@ -161,11 +188,12 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask addCard(String card, int isDefault, OnAsyncTaskListener listener) {
+    static ThreadTask addCard(String card, int isDefault, ResponseListener listener) {
         APITag apiTag = find(ADD_CARD);
         if (apiTag == null)
             return null;
@@ -176,15 +204,16 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask getAddress(OnAsyncTaskListener listener) {
+    static ThreadTask getAddress(ResponseListener listener) {
         return lazyGet(GET_ADDRESS, listener);
     }
 
-    static ThreadTask editAddress(String realName, String address, OnAsyncTaskListener listener) {
+    static ThreadTask editAddress(String realName, String address, ResponseListener listener) {
         APITag apiTag = find(EDIT_ADDRESS);
         if (apiTag == null)
             return null;
@@ -195,19 +224,21 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask logout(OnAsyncTaskListener listener) {
+    static ThreadTask logout(ResponseListener listener) {
         APITag apiTag = find(LOGOUT);
         if (apiTag == null)
             return null;
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        CommonListener commonListener = new CommonListener(listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask login(String username, String password, OnAsyncTaskListener listener) {
+    static ThreadTask login(String username, String password, ResponseListener listener) {
         APITag apiTag = find(LOGIN);
         if (apiTag == null)
             return null;
@@ -218,11 +249,12 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask register(String password, String captcha, OnAsyncTaskListener listener) {
+    static ThreadTask register(String password, String captcha, ResponseListener listener) {
         APITag apiTag = find(REGISTER);
         if (apiTag == null)
             return null;
@@ -238,11 +270,12 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    static ThreadTask captcha(String phone, OnAsyncTaskListener listener) {
+    static ThreadTask captcha(String phone, ResponseListener listener) {
         APITag apiTag = find(CAPTCHA);
         if (apiTag == null)
             return null;
@@ -253,16 +286,33 @@ public class API {
             e.printStackTrace();
             return null;
         }
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + apiTag.url, apiTag.method, jsonObject.toString(), cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
 
-    private static ThreadTask lazyGet(int tag, OnAsyncTaskListener listener) {
+    private static ThreadTask lazyGet(int tag, ResponseListener listener) {
         APITag apiTag = find(tag);
         if (apiTag == null)
             return null;
+        CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host+apiTag.url, apiTag.method, "{}", cookie);
-        return new ThreadTask(httpTaskRequest, listener);
+        return new ThreadTask(httpTaskRequest, commonListener.httpListener);
+    }
+
+    static JSONObject ResponseShow(Context context, String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            if ((int) jsonObject.get("code") != 0) {
+                String msg = (String) jsonObject.get("msg");
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            }
+            return jsonObject;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 
@@ -275,4 +325,9 @@ class APITag {
         this.method = method;
         this.url = url;
     }
+}
+
+
+interface ResponseListener {
+    void callback(String response);
 }

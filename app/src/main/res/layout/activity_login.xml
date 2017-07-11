@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:padding="16dp"
     android:background="@color/colorBodyBackground"
-    tools:context="cn.a6_79.wepay_buyer.MainActivity">
+    tools:context="cn.a6_79.wepay_buyer.LoginActivity">
 
     <ImageView
         android:src="@drawable/shopping_cart"
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         style="@style/TextField">
         <EditText
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone_input_hint"
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         style="@style/TextField">
         <EditText
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_input_hint"
@@ -54,6 +56,7 @@
         style="@style/ButtonStyle"/>
 
     <TextView
+        android:id="@+id/go_to_register"
         android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
