@@ -9,8 +9,6 @@ import android.os.StrictMode;
 import android.view.Window;
 import android.widget.RadioGroup;
 
-import cn.a6_79.wepay_buyer.fragment.FragmentFactory;
-
 public class OrderActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
     private FragmentManager fragmentManager;
 

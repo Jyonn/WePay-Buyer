@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class API {
         CommonListener(final ResponseListener listener) {
             httpListener = new OnAsyncTaskListener() {
                 @Override
-                public void callback(HttpTaskResponse httpTaskResponse) {
+                public void callback(HttpTaskResponse httpTaskResponse) throws JSONException {
                     if (httpTaskResponse.getCookie() != null)
                         cookie = httpTaskResponse.getCookie();
                     listener.callback(httpTaskResponse.getResponse());
@@ -44,7 +45,7 @@ public class API {
         apis.add(new APITag(SET_DEFAULT_CARD, PUT, "/user/default-card"));
         apis.add(new APITag(DELETE_CARD, DELETE, "/card/<0>"));
         apis.add(new APITag(GET_CARD, GET, "/card"));
-        apis.add(new APITag(GET_CATEGORY, GET, "/category"));
+        apis.add(new APITag(GET_CATEGORY, GET, "/category?type=unset"));
         apis.add(new APITag(GET_GOOD_IN_CATEGORY, GET, "/category/<0>/good"));
         apis.add(new APITag(ADD_BUTTON, POST, "/button"));
         apis.add(new APITag(EDIT_BUTTON, PUT, "/button/<0>"));
@@ -327,7 +328,6 @@ class APITag {
     }
 }
 
-
 interface ResponseListener {
-    void callback(String response);
+    void callback(String response) throws JSONException;
 }

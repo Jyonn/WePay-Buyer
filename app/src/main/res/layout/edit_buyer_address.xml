@@ -31,7 +31,7 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/login_username"
+            android:id="@+id/recipient_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/recipient_input_hint"
@@ -45,7 +45,7 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/address_input_hint"

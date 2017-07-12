@@ -1,11 +1,10 @@
-package cn.a6_79.wepay_buyer.fragment;
+package cn.a6_79.wepay_buyer;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import cn.a6_79.wepay_buyer.R;
 
 public class HaveOrderedOrder extends Fragment {
     @Override

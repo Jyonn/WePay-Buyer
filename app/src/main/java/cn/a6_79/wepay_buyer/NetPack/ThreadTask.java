@@ -3,6 +3,8 @@ package cn.a6_79.wepay_buyer.NetPack;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+
 public class ThreadTask extends AsyncTask<Void, Integer, HttpTaskResponse> {
     private OnAsyncTaskListener listener;
     private HttpTaskRequest httpTaskRequest;
@@ -21,7 +23,12 @@ public class ThreadTask extends AsyncTask<Void, Integer, HttpTaskResponse> {
         super.onPostExecute(httpTaskResponse);
         if (isCancelled())
             return;
-        if (listener != null)
-            listener.callback(httpTaskResponse);
+        if (listener != null) {
+            try {
+                listener.callback(httpTaskResponse);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

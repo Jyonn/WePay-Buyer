@@ -1,8 +1,6 @@
-package cn.a6_79.wepay_buyer.fragment;
+package cn.a6_79.wepay_buyer;
 
 import android.app.Fragment;
-
-import cn.a6_79.wepay_buyer.R;
 
 
 public class FragmentFactory {

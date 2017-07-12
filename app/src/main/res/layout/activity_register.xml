@@ -81,8 +81,7 @@
         android:textStyle="bold"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorText"
-        android:textSize="20sp"
-        style="@style/ButtonStyle"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/go_to_login"

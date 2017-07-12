@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 
 public class HttpTask {
     static HttpTaskResponse htmlTask(HttpTaskRequest httpTaskRequest) {

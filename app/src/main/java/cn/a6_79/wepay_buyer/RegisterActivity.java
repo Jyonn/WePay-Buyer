@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.a6_79.wepay_buyer.LoginActivity;
@@ -70,12 +71,24 @@ public class RegisterActivity extends AppCompatActivity {
     };
 
     ResponseListener registerListener = new ResponseListener() {
+        private User user;
         @Override
-        public void callback(String response) {
+        public void callback(String response) throws JSONException {
             JSONObject jsonObject = API.ResponseShow(getApplicationContext(), response);
-//            if (jsonObject != null) {
-//
-//            }
+            JSONObject body = jsonObject.getJSONObject("body");
+            if (body != null) {
+                EditText usernameText = (EditText) findViewById(R.id.login_username);
+                String username = usernameText.getText().toString();
+                String userID = body.getString("user_id");
+                String avatar = body.getString("avatar");
+
+                User.userID = userID;
+                User.username = username;
+                User.avatar = avatar;
+
+                Intent intent = new Intent(RegisterActivity.this, UserMainActivity.class);
+                startActivity(intent);
+            }
         }
     };
 }
