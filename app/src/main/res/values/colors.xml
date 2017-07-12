@@ -6,4 +6,8 @@
     <color name="colorHead">#EEEEEE</color>
     <color name="colorBodyBackground">#FFFFFF</color>
     <color name="colorText">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="tab_off">#8d8d8d</color>
+    <color name="menu">#515151</color>
 </resources>

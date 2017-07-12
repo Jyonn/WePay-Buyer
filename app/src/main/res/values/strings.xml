@@ -9,4 +9,36 @@
     <string name="send_captcha_text">获取验证码</string>
     <string name="register_text">注册</string>
     <string name="go_to_login">我有账号，立即登录</string>
+    <string name="username">用户名</string>
+
+    <string name="buyer_button">我的按钮</string>
+    <string name="personal_info">个人中心</string>
+
+    <string name="logout_text">退出帐号</string>
+    <string name="edit_button">编辑</string>
+    <string name="save_button">保存</string>
+    <string name="delete_button">删除</string>
+
+    <string name="recipient_input_hint">请输入收货人姓名</string>
+    <string name="address_input_hint">请输入收货地址</string>
+    <string name="buyer_address">我的收货地址</string>
+
+    <string name="card_input_hint">请输入银行卡号</string>
+    <string name="set_default_card">设为默认银行卡</string>
+    <string name="buyer_card">我的银行卡</string>
+    <string name="add_buyer_card">新增银行卡</string>
+
+    <string name="wifi_account">wifi账号</string>
+    <string name="wifi_password">wifi密码</string>
+    <string name="wifi_account_input_hint">请输入wifi账号</string>
+    <string name="wifi_password_input_hint">请输入wifi密码</string>
+    <string name="button_connect_info">按钮连接信息</string>
+
+    <string name="buyer_order">我的订单</string>
+    <string name="have_delivered">已发货</string>
+    <string name="have_ordered">已接单</string>
+    <string name="confirm_receipt_button">确认收货</string>
+
+    <string name="choose_good">选择商品</string>
+
 </resources>
