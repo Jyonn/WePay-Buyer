@@ -55,8 +55,8 @@ public class API {
         apis.add(new APITag(RECEIVE, PUT, "/order/<0>/status"));
     }
 
-//    private static String host = "https://aks.6-79.cn";
-    private static String host = "http://115.159.76.16:987";
+    private static String host = "https://aks.6-79.cn";
+//    private static String host = "http://115.159.76.16:987";
 
     private static int CAPTCHA = 1;  // 发送验证码
     private static int REGISTER = 2;  // 注册
