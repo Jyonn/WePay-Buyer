@@ -66,6 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
+                        android:gravity="end"
                         android:text="¥55.80" />
 
                 </LinearLayout>
@@ -129,6 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
+                        android:gravity="end"
                         android:text="¥8.90" />
 
                 </LinearLayout>

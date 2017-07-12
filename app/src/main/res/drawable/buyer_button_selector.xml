@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/buyer_button_on" android:state_pressed="true"/>
-    <item android:drawable="@drawable/buyer_button_on" android:state_checked="true"/>
-    <item android:drawable="@drawable/buyer_button_off"/>
+    <item
+        android:drawable="@drawable/buyer_button_on"
+        android:width="40dp"
+        android:layout_height="40dp"
+        android:state_pressed="true"/>
+    <item
+        android:drawable="@drawable/buyer_button_on"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:state_checked="true"/>
+    <item
+        android:drawable="@drawable/buyer_button_off"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
 </selector>
