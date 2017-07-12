@@ -21,15 +21,16 @@ public class HttpTask {
             if (httpTaskRequest.getSession() != null)
                 mHttpURLConnection.setRequestProperty("Cookie", httpTaskRequest.getSession());
             mHttpURLConnection.setDoInput(true);
-            mHttpURLConnection.setDoOutput(true);
+            mHttpURLConnection.setDoOutput(!httpTaskRequest.getMethod().equals("GET"));
             mHttpURLConnection.setUseCaches(false);
             mHttpURLConnection.connect();
 
-            DataOutputStream dos = new DataOutputStream(mHttpURLConnection.getOutputStream());
-            if (!httpTaskRequest.getMethod().equals("GET"))
+            if (!httpTaskRequest.getMethod().equals("GET")) {
+                DataOutputStream dos = new DataOutputStream(mHttpURLConnection.getOutputStream());
                 dos.write(httpTaskRequest.getValue().getBytes());
-            dos.flush();
-            dos.close();
+                dos.flush();
+                dos.close();
+            }
 
             int respondCode = mHttpURLConnection.getResponseCode();
             String cookieValue = mHttpURLConnection.getHeaderField("Set-Cookie");
