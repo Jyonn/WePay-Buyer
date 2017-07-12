@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:padding="10dp"
+            android:background="@color/colorPrimary" >
+            <ImageView
+                android:src="@drawable/return_last_white"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:text="@string/choose_good"
+                android:layout_weight="4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/order_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/have_delivered"
+                style="@style/order_tab"
+                android:text="@string/have_delivered" />
+
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/have_ordered"
+                style="@style/order_tab"
+                android:text="@string/have_ordered" />
+
+        </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/choose_good_list"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="hehehehe" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
