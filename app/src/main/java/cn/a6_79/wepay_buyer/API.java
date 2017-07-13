@@ -2,6 +2,7 @@ package cn.a6_79.wepay_buyer;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -14,8 +15,9 @@ import cn.a6_79.wepay_buyer.NetPack.HttpTaskResponse;
 import cn.a6_79.wepay_buyer.NetPack.OnAsyncTaskListener;
 import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
 
-class API {
-    static String cookie = null;
+public class API {
+    public static View.OnClickListener currentDeleteCard = null;
+    public static String cookie = null;
     private static ArrayList<APITag> apis = new ArrayList<>();
 
     private static class CommonListener {
@@ -51,7 +53,7 @@ class API {
         apis.add(new APITag(EDIT_BUTTON, PUT, "/button/<0>"));
         apis.add(new APITag(DELETE_BUTTON, DELETE, "/button/<0>"));
         apis.add(new APITag(GET_BUTTON, GET, "/button"));
-        apis.add(new APITag(GET_ORDER, GET, "/order?status=<0>"));
+        apis.add(new APITag(GET_ORDER, GET, "/order?status=<0>&page=<1>&count=<2>"));
         apis.add(new APITag(RECEIVE, PUT, "/order/<0>/status"));
     }
 
@@ -93,11 +95,14 @@ class API {
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
         return new ThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static ThreadTask getOrder(String status, ResponseListener listener) {
+    static ThreadTask getOrder(String status, int page, int count, ResponseListener listener) {
         APITag apiTag = find(GET_ORDER);
         if (apiTag == null)
             return null;
-        String url = apiTag.url.replace("<0>", status);
+        String url = apiTag.url.
+                replace("<0>", status).
+                replace("<1>", String.valueOf(page)).
+                replace("<2>", String.valueOf(count));
         CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
         return new ThreadTask(httpTaskRequest, commonListener.httpListener);
