@@ -9,6 +9,7 @@
         android:layout_height="100dp">
 
         <ImageView
+            android:id="@+id/good_img"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content">
                 <TableRow>
                     <TextView
+                        android:id="@+id/category_name"
                         android:layout_weight="100"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -35,6 +37,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/delete_button"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,11 +57,12 @@
                 android:text="海飞丝洗发水 丝质柔滑型男女士去屑止痒洗发水750ml" />
 
             <TextView
+                android:id="@+id/good_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:gravity="end"
-                android:text="¥55.80" />
+                android:text="数量：2" />
 
         </LinearLayout>
     </LinearLayout>

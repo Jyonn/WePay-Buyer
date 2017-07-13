@@ -65,7 +65,6 @@ public class BuyerCard extends AppCompatActivity {
         @Override
         public void callback(String response) throws JSONException {
             JSONObject jsonObject = API.ResponseShow(getApplicationContext(), response);
-            assert jsonObject != null;
             JSONArray body = jsonObject.getJSONArray("body");
             LinearLayout cardList= (LinearLayout) findViewById(R.id.card_list);
             cardList.removeAllViews();
@@ -105,21 +104,12 @@ public class BuyerCard extends AppCompatActivity {
 
 
 class CardCard extends CardView {
-    private String card;
-    private String cardID;
-    private Boolean isDefault;
-    private Activity activity;
-
     private TextView mDeleteButton;
     private CheckBox mSetDefault;
 
     public CardCard (String card, final String cardID, final Boolean isDefault, final Context context, final Activity activity,
                      final ResponseListener setDefaultCardListener, final ResponseListener deleteCardListener) {
         super(context);
-        this.card = card;
-        this.cardID = cardID;
-        this.isDefault = isDefault;
-        this.activity = activity;
 
         LayoutInflater.from(context).inflate(R.layout.card_card, this);
 
