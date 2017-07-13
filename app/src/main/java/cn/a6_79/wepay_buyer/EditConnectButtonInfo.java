@@ -6,10 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -28,10 +36,18 @@ public class EditConnectButtonInfo extends AppCompatActivity {
         if (!wifiAccount.equals("请设置wifi账号")){
             mWifiAccount.setText(wifiAccount);
         }
-        EditText mWifiPassword = (EditText)findViewById(R.id.edit_wifi_account);
+        EditText mWifiPassword = (EditText)findViewById(R.id.edit_wifi_password);
         if (!wifiPassword.equals("请设置wifi密码")) {
             mWifiPassword.setText(wifiPassword);
         }
+
+        ImageView mReturnImage = (ImageView)findViewById(R.id.return_button_connect_info);
+        mReturnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Button mSaveConnectInfo = (Button)findViewById(R.id.save_button_connect_info);
         mSaveConnectInfo.setOnClickListener(new View.OnClickListener() {
@@ -42,30 +58,30 @@ public class EditConnectButtonInfo extends AppCompatActivity {
                 String wifiAccountText = mWifiAccountText.getText().toString();
                 String wifiPasswordText = mWifiPasswordText.getText().toString();
 
-                //TODO:写文件
+                try {
+                    saveInfo(wifiAccountText, wifiPasswordText);
+                    finish();
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
 
-    private void save(String data, String filename) {
-        FileOutputStream out = null;
-        PrintStream ps = null;
-        try {
-            out = super.openFileOutput(filename, EditConnectButtonInfo.MODE_APPEND);
-            ps = new PrintStream(out);
-            ps.println(data);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                    ps.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    private void saveInfo(String wifiAccountText, String wifiPasswordText) throws JSONException, IOException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("UserID", User.username);
+        jsonObject.put("SSID", wifiAccountText);
+        jsonObject.put("PWD", wifiPasswordText);
+
+        FileOutputStream fileWirte;
+        PrintStream printStream;
+
+        fileWirte = super.openFileOutput("info.json", EditConnectButtonInfo.MODE_PRIVATE);
+        printStream = new PrintStream(fileWirte);
+        printStream.print(jsonObject.toString());
+        fileWirte.close();
+        printStream.close();
     }
 }

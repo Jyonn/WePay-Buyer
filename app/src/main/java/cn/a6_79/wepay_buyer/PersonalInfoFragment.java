@@ -81,7 +81,7 @@ public class PersonalInfoFragment extends Fragment {
         @Override
         public void callback(String response) throws JSONException{
             API.ResponseShow(getActivity().getApplicationContext(), response);
-            startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));
+            getActivity().finish();
         }
     };
 

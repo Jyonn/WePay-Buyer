@@ -2,6 +2,7 @@ package cn.a6_79.wepay_buyer;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import cn.a6_79.wepay_buyer.NetPack.OnAsyncTaskListener;
 import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
 
 public class API {
+    public static View.OnClickListener currentDeleteCard = null;
     public static String cookie = null;
     private static ArrayList<APITag> apis = new ArrayList<>();
 

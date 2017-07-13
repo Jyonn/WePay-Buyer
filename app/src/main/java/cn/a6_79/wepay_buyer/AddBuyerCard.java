@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +21,15 @@ public class AddBuyerCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_buyer_card);
+
+        ImageView mReturnImage = (ImageView)findViewById(R.id.return_buyer_card);
+        mReturnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         Button mAddCard = (Button)findViewById(R.id.save_buyer_card);
         mAddCard.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +56,7 @@ public class AddBuyerCard extends AppCompatActivity {
         @Override
         public void callback(String response) throws JSONException {
             JSONObject jsonObject = API.ResponseShow(getApplicationContext(), response);
-            startActivity(new Intent(getApplicationContext(), BuyerCard.class));
+            finish();
         }
     };
 }

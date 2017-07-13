@@ -10,6 +10,7 @@
         android:layout_marginBottom="10dp" >
         <TableRow>
             <ImageView
+                android:id="@+id/return_buyer_card"
                 android:src="@drawable/return_last"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -46,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="@string/set_default_card" />
+        android:text="@string/default_card" />
 
     <Button
         android:id="@+id/save_buyer_card"

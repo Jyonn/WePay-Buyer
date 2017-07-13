@@ -24,7 +24,7 @@
     <string name="buyer_address">我的收货地址</string>
 
     <string name="card_input_hint">请输入银行卡号</string>
-    <string name="set_default_card">设为默认银行卡</string>
+    <string name="default_card">默认银行卡</string>
     <string name="buyer_card">我的银行卡</string>
     <string name="add_buyer_card">新增银行卡</string>
 
@@ -40,5 +40,6 @@
     <string name="confirm_receipt_button">确认收货</string>
 
     <string name="choose_good">选择商品</string>
+
 
 </resources>

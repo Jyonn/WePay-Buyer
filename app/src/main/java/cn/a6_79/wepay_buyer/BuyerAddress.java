@@ -15,12 +15,20 @@ import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
 
 public class BuyerAddress extends AppCompatActivity {
     @Override
+    protected void onResume() {
+        super.onResume();
+        initInterFace();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initInterFace();
+    }
+
+    private void initInterFace () {
         setContentView(R.layout.buyer_address);
-
         API.init();
-
         ThreadTask task = API.getAddress(getAddressListener);
         if (task != null)
             task.execute();
@@ -29,9 +37,7 @@ public class BuyerAddress extends AppCompatActivity {
         mReturnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), UserMainActivity.class);
-                intent.putExtra("default_id", R.id.personal_info);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -50,7 +56,6 @@ public class BuyerAddress extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     ResponseListener getAddressListener = new ResponseListener() {

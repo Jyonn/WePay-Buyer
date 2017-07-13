@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
         <TableRow>
             <ImageView
+                android:id="@+id/return_personal_info"
                 android:src="@drawable/return_last"
                 android:layout_weight="1"
                 android:layout_width="0dp"

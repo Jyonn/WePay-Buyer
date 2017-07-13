@@ -36,7 +36,7 @@ public class EditBuyerAddress extends AppCompatActivity {
         mReturnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), BuyerAddress.class));
+                finish();
             }
         });
 
@@ -59,7 +59,7 @@ public class EditBuyerAddress extends AppCompatActivity {
         @Override
         public void callback(String response) throws JSONException {
             JSONObject jsonObject = API.ResponseShow(getApplicationContext(), response);
-            startActivity(new Intent(getApplicationContext(), BuyerAddress.class));
+            finish();
         }
     };
 }

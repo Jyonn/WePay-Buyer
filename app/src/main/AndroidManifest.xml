@@ -19,16 +19,16 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserMainActivity" />
-        <activity android:name=".OrderActivity" />
         <activity android:name=".BuyerAddress" />
-        <activity android:name=".AddBuyerCard" />
         <activity android:name=".EditBuyerAddress" />
         <activity android:name=".BuyerCard" />
+        <activity android:name=".AddBuyerCard" />
         <activity android:name=".BuyerOrder" />
         <activity android:name=".ConnectButtonInfo" />
         <activity android:name=".EditConnectButtonInfo" />
     </application>
-    <uses-permission
-        android:name="android.permission.INTERNET">
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 </manifest>
