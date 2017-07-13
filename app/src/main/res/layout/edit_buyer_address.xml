@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
         <TableRow>
             <ImageView
+                android:id="@+id/return_buyer_address"
                 android:src="@drawable/return_last"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -31,11 +32,10 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/recipient_name"
+            android:id="@+id/edit_recipient_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/recipient_input_hint"
-            android:inputType="phone"
             android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -45,11 +45,10 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/edit_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/address_input_hint"
-            android:inputType="textPassword"
             android:maxLines="5"/>
     </android.support.design.widget.TextInputLayout>
 

@@ -30,11 +30,10 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/login_username"
+            android:id="@+id/edit_wifi_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/wifi_account_input_hint"
-            android:inputType="phone"
             android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -44,16 +43,15 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/edit_wifi_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/wifi_password_input_hint"
-            android:inputType="textPassword"
             android:maxLines="5"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/edit_button_connect_info"
+        android:id="@+id/save_button_connect_info"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

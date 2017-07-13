@@ -3,6 +3,7 @@ package cn.a6_79.wepay_buyer;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioGroup;
 
@@ -18,7 +19,14 @@ public class UserMainActivity extends Activity implements RadioGroup.OnCheckedCh
         RadioGroup radioGroup = findViewById(R.id.bottom_tab);
         radioGroup.setOnCheckedChangeListener(this);
 
-        findViewById(R.id.good_category).performClick();
+        Intent intent = getIntent();
+        int defaultID = intent.getIntExtra("default_id", 1);
+        if (defaultID != 1) {
+            findViewById(defaultID).performClick();
+        }
+        else {
+            findViewById(R.id.button_list).performClick();
+        }
     }
 
     @Override

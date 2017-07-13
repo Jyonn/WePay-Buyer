@@ -29,7 +29,9 @@ public class BuyerAddress extends AppCompatActivity {
         mReturnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), PersonalInfoFragment.class));
+                Intent intent = new Intent(getApplicationContext(), UserMainActivity.class);
+                intent.putExtra("default_id", R.id.personal_info);
+                startActivity(intent);
             }
         });
 
@@ -61,10 +63,21 @@ public class BuyerAddress extends AppCompatActivity {
                 String address = body.getString("address");
 
                 TextView recipientNameView = (TextView)findViewById(R.id.recipient_name);
-                recipientNameView.setText(realName);
+                if (!realName.equals("null") && !realName.equals("")) {
+                    recipientNameView.setText(realName);
+                }
+                else {
+                    recipientNameView.setHint("请添加收货人");
+                }
 
                 TextView addressView = (TextView)findViewById(R.id.address);
-                addressView.setText(address);
+                if (!address.equals("null") && !address.equals("")) {
+                    addressView.setText(address);
+                }
+                else {
+                    addressView.setHint("请添加收货地址");
+                }
+
             }
         }
     };

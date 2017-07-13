@@ -40,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20px"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="张三" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/address"
@@ -49,8 +48,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20px"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="浙江省杭州市浙江大学玉泉校区" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 

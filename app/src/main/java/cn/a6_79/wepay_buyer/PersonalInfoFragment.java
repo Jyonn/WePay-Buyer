@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,31 +80,9 @@ public class PersonalInfoFragment extends Fragment {
     ResponseListener logoutListener = new ResponseListener() {
         @Override
         public void callback(String response) throws JSONException{
-            JSONObject jsonObject = API.ResponseShow(getActivity().getApplicationContext(), response);
-            JSONObject body = jsonObject.getJSONObject("body");
-            Log.d("msg", cookie);
-            if (body == null) {
-                User.userID = null;
-                User.username = null;
-                User.avatar = null;
-                startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));
-            }
+            API.ResponseShow(getActivity().getApplicationContext(), response);
+            startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));
         }
     };
 
-
-//
-//    ResponseListener getCardListener = new ResponseListener() {
-//        @Override
-//        public void callback(String response) throws JSONException{
-//            JSONObject jsonObject = API.ResponseShow(getActivity().getApplicationContext(), response);
-//            JSONArray body = jsonObject.getJSONArray("body");
-//            if (body != null) {
-//                String bodyString = body.toString();
-//                Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
-//                intent.putExtra("card_list", bodyString);
-//                startActivity(intent);
-//            }
-//        }
-//    };
 }

@@ -7,7 +7,7 @@ public class FragmentFactory {
     public static Fragment getBottomTabInstanceByIndex(int index) {
         Fragment fragment = null;
         switch (index) {
-            case R.id.good_category:
+            case R.id.button_list:
                 fragment = new BuyerButtonFragment();
                 break;
             case R.id.personal_info:

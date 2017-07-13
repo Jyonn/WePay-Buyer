@@ -20,7 +20,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/good_category"
+            android:id="@+id/button_list"
             style="@style/bottom_tab"
             android:drawableTop="@drawable/buyer_button_selector"
             android:text="@string/buyer_button" />

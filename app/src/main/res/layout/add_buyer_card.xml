@@ -32,15 +32,16 @@
         android:padding="10dp"
         style="@style/TextField">
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/add_card_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/card_input_hint"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
     <CheckBox
+        android:id="@+id/is_default_card"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -21,10 +21,12 @@
         <activity android:name=".UserMainActivity" />
         <activity android:name=".OrderActivity" />
         <activity android:name=".BuyerAddress" />
+        <activity android:name=".AddBuyerCard" />
         <activity android:name=".EditBuyerAddress" />
         <activity android:name=".BuyerCard" />
         <activity android:name=".BuyerOrder" />
         <activity android:name=".ConnectButtonInfo" />
+        <activity android:name=".EditConnectButtonInfo" />
     </application>
     <uses-permission
         android:name="android.permission.INTERNET">

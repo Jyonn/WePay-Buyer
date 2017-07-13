@@ -46,6 +46,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/wifi_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
@@ -64,6 +65,7 @@
                     android:text="@string/wifi_password" />
 
                 <TextView
+                    android:id="@+id/wifi_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
@@ -79,7 +81,7 @@
     </android.support.v7.widget.CardView>
 
     <Button
-        android:id="@+id/edit_buyer_address"
+        android:id="@+id/edit_connect_info"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
