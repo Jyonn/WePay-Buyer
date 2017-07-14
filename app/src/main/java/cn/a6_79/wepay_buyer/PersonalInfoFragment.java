@@ -2,6 +2,7 @@ package cn.a6_79.wepay_buyer;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -86,8 +87,14 @@ public class PersonalInfoFragment extends Fragment {
         @Override
         public void callback(String response) throws JSONException{
             API.ResponseShow(getActivity().getApplicationContext(), response);
+            SharedPreferences account = getActivity().getSharedPreferences("account", 0);
+            SharedPreferences.Editor editor = account.edit();
+            editor.putString("username", "");
+            editor.putString("password", "");
+            editor.commit();
             getActivity().finish();
+            Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         }
     };
-
 }

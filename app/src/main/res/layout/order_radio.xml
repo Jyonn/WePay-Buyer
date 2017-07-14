@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/category_radio"
-    android:padding="40px"
-    android:text="类别"
-    android:layout_weight="1"
-    android:gravity="start"
-    style="@style/order_tab" />

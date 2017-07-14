@@ -1,6 +1,8 @@
 package cn.a6_79.wepay_buyer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class LoginActivity extends AppCompatActivity {
+    private SharedPreferences account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,17 @@ public class LoginActivity extends AppCompatActivity {
         final EditText
                 mUsername = (EditText) findViewById(R.id.login_username),
                 mPassword = (EditText) findViewById(R.id.login_password);
+
+        account = getSharedPreferences("account", 0);
+        String username = account.getString("username", "");
+        String password = account.getString("password", "");
+        if (!username.equals("")) {
+            mUsername.setText(username);
+            mPassword.setText(password);
+            HttpThreadTask task = API.login(mUsername.getText().toString(), mPassword.getText().toString(), loginListener);
+            if (task != null)
+                task.execute();
+        }
 
         Button mLoginBtn = (Button) findViewById(R.id.login_button);
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +64,21 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject body = jsonObject.getJSONObject("body");
             if (body != null) {
                 EditText usernameText = (EditText) findViewById(R.id.login_username);
+                EditText passwordText = (EditText) findViewById(R.id.login_password);
                 String username = usernameText.getText().toString();
+                String password = passwordText.getText().toString();
                 String userID = body.getString("user_id");
                 String avatar = body.getString("avatar");
 
                 User.userID = userID;
                 User.username = username;
                 User.avatar = avatar;
+
+                SharedPreferences.Editor editor = account.edit();
+                editor.putString("username", username);
+                editor.putString("password", password);
+                editor.commit();
+                finish();
 
                 Intent intent = new Intent(LoginActivity.this, UserMainActivity.class);
                 startActivity(intent);
