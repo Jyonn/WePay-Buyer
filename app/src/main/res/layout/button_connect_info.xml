@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:padding="20dp"
                     android:text="@string/wifi_account"
-                    android:textColor="@color/black"
+                    android:textColor="@color/menu"
                     android:textSize="18sp" />
 
                 <TextView
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/menu"
                     android:textSize="18sp"
                     android:text="ZJUWLAN" />
             </TableRow>
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/menu"
                     android:textSize="18sp"
                     android:text="@string/wifi_password" />
 
@@ -70,9 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:text="1234567890" />
+                    android:textColor="@color/menu"
+                    android:textSize="18sp" />
             </TableRow>
 
 

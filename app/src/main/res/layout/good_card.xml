@@ -7,7 +7,8 @@
     <LinearLayout
         android:id="@+id/good_list_card"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="80dp"
+        android:background="@color/white" >
 
         <ImageView
             android:id="@+id/good_card_img"
@@ -27,12 +28,14 @@
                 android:id="@+id/good_card_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/menu"
                 android:padding="3dp" />
 
             <TextView
                 android:id="@+id/good_card_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
                 android:padding="3dp"
                 android:gravity="end" />
 

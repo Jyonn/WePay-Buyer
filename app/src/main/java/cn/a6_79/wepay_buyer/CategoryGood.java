@@ -72,6 +72,7 @@ public class CategoryGood extends AppCompatActivity {
                     int categoryID = categoryGoods.getInt("category_id");
 
                     GoodCard goodCard = new GoodCard(goodID, brand, goodName, store, price, pic, description, categoryName, categoryID, getApplicationContext(), CategoryGood.this);
+                    goodCard.setCardBackgroundColor(0xffffffff);
                     goodCardList.addView(goodCard);
                 }
             }

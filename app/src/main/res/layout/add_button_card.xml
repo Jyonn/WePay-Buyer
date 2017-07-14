@@ -7,7 +7,8 @@
     <LinearLayout
         android:id="@+id/add_button_card_area"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:background="@color/white" >
 
         <ImageView
             android:layout_weight="1"
@@ -29,6 +30,7 @@
                     android:padding="5dp"
                     android:text="@string/add_button"
                     android:textSize="20sp"
+                    android:textColor="@color/menu"
                     android:textStyle="bold" />
 
             </LinearLayout>

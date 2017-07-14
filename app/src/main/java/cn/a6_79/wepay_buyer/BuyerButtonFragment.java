@@ -69,9 +69,11 @@ public class BuyerButtonFragment extends Fragment {
 
                     ButtonCard aButtonCard = new ButtonCard(buttonID, categoryID, categoryName, goodID, goodName, number, goodPic, price, getActivity().getApplicationContext(),
                             getActivity(), deleteButtonListener);
+                    aButtonCard.setCardBackgroundColor(0xffffffff);
                     buttonCardList.addView(aButtonCard);
                 }
                 AddButtonCard addButtonCard = new AddButtonCard(getActivity().getApplicationContext(), getActivity());
+                addButtonCard.setCardBackgroundColor(0xffffffff);
                 buttonCardList.addView(addButtonCard);
             }
         }

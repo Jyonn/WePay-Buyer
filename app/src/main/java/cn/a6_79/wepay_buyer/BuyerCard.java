@@ -75,6 +75,7 @@ public class BuyerCard extends AppCompatActivity {
                     Boolean isDefault = cardInfo.getBoolean("is_default");
 
                     CardCard aCard = new CardCard(card, cardID, isDefault, getApplicationContext(), BuyerCard.this, deleteCardListener, setDefaultCardListener);
+                    aCard.setCardBackgroundColor(0xffffffff);
                     cardList.addView(aCard);
                 }
             }
