@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class EditBuyerAddress extends AppCompatActivity {
     @Override
@@ -48,7 +48,7 @@ public class EditBuyerAddress extends AppCompatActivity {
                 EditText mAfterAddress = (EditText)findViewById(R.id.edit_address);
                 final String afterEditRecipientName = mAfterRecipientName.getText().toString();
                 final String afterEditAddress = mAfterAddress.getText().toString();
-                ThreadTask task = API.editAddress(afterEditRecipientName, afterEditAddress, saveAddressListener);
+                HttpThreadTask task = API.editAddress(afterEditRecipientName, afterEditAddress, saveAddressListener);
                 if (task != null)
                     task.execute();
             }

@@ -9,12 +9,19 @@ import android.widget.RadioGroup;
 
 public class UserMainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
     private FragmentManager fragmentManager;
-
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        initInterface();
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usermain);
+        initInterface();
+    }
 
+    private void initInterface () {
+        setContentView(R.layout.activity_usermain);
         fragmentManager = getFragmentManager();
         RadioGroup radioGroup = findViewById(R.id.bottom_tab);
         radioGroup.setOnCheckedChangeListener(this);
@@ -28,7 +35,6 @@ public class UserMainActivity extends Activity implements RadioGroup.OnCheckedCh
             findViewById(R.id.button_list).performClick();
         }
     }
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();

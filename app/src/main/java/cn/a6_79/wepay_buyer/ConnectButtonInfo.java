@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ConnectButtonInfo extends AppCompatActivity {
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initInterface();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        initInterface();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

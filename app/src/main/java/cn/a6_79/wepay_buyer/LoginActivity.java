@@ -3,7 +3,6 @@ package cn.a6_79.wepay_buyer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +10,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
-
-import static cn.a6_79.wepay_buyer.API.cookie;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class LoginActivity extends AppCompatActivity {
     @Override
@@ -31,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.login(mUsername.getText().toString(), mPassword.getText().toString(), loginListener);
+                HttpThreadTask task = API.login(mUsername.getText().toString(), mPassword.getText().toString(), loginListener);
                 if (task != null)
                     task.execute();
             }

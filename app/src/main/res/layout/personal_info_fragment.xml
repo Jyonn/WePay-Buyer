@@ -27,8 +27,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:src="@drawable/avatar" />
+                android:cropToPadding="false" />
 
             <TextView
                 android:id="@+id/username"

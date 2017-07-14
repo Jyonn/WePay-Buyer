@@ -21,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class BuyerCard extends AppCompatActivity {
     @Override
@@ -30,16 +30,15 @@ public class BuyerCard extends AppCompatActivity {
         initInterface();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initInterface();
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        initInterface();
+//    }
 
     private void initInterface() {
         setContentView(R.layout.buyer_card);
-        API.init();
-        ThreadTask task = API.getCard(getCardListener);
+        HttpThreadTask task = API.getCard(getCardListener);
         if (task != null)
             task.execute();
 
@@ -126,7 +125,7 @@ class CardCard extends CardView {
             public void onClick(View view) {
                 API.currentDeleteCard = this;
                 if (!isDefault) {
-                    ThreadTask task = API.setDefaultCard(cardID, setDefaultCardListener);
+                    HttpThreadTask task = API.setDefaultCard(cardID, setDefaultCardListener);
                     if (task != null)
                         task.execute();
                 }
@@ -145,7 +144,7 @@ class CardCard extends CardView {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                ThreadTask task = API.deleteCard(cardID, deleteCardListener);
+                                HttpThreadTask task = API.deleteCard(cardID, deleteCardListener);
                                 if (task != null)
                                     task.execute();
                             }

@@ -1,14 +1,13 @@
 package cn.a6_79.wepay_buyer.NetPack;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONException;
 
-public class ThreadTask extends AsyncTask<Void, Integer, HttpTaskResponse> {
-    private OnAsyncTaskListener listener;
+public class HttpThreadTask extends AsyncTask<Void, Integer, HttpTaskResponse> {
+    private OnAsyncHttpTaskListener listener;
     private HttpTaskRequest httpTaskRequest;
-    public ThreadTask(HttpTaskRequest httpTaskRequest, OnAsyncTaskListener listener) {
+    public HttpThreadTask(HttpTaskRequest httpTaskRequest, OnAsyncHttpTaskListener listener) {
         this.httpTaskRequest = httpTaskRequest;
         this.listener = listener;
     }

@@ -1,5 +1,7 @@
 package cn.a6_79.wepay_buyer.NetPack;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -21,11 +23,12 @@ public class HttpTask {
             if (httpTaskRequest.getSession() != null)
                 mHttpURLConnection.setRequestProperty("Cookie", httpTaskRequest.getSession());
             mHttpURLConnection.setDoInput(true);
-            mHttpURLConnection.setDoOutput(!httpTaskRequest.getMethod().equals("GET"));
+            boolean is_get = httpTaskRequest.getMethod().equals("GET");
+            mHttpURLConnection.setDoOutput(!is_get);
             mHttpURLConnection.setUseCaches(false);
             mHttpURLConnection.connect();
 
-            if (!httpTaskRequest.getMethod().equals("GET")) {
+            if (!is_get) {
                 DataOutputStream dos = new DataOutputStream(mHttpURLConnection.getOutputStream());
                 dos.write(httpTaskRequest.getValue().getBytes());
                 dos.flush();

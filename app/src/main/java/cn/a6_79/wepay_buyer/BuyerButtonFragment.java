@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -19,7 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.ImageTaskResponse;
+import cn.a6_79.wepay_buyer.NetPack.ImageThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.OnAsyncImageTaskListener;
 
 public class BuyerButtonFragment extends Fragment {
     @Override
@@ -29,10 +33,16 @@ public class BuyerButtonFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initInterface();
+    }
+
     private void initInterface() {
         API.init();
 
-        ThreadTask task = API.getButton(getButtonListener);
+        HttpThreadTask task = API.getButton(getButtonListener);
         if (task != null)
             task.execute();
 
@@ -54,8 +64,10 @@ public class BuyerButtonFragment extends Fragment {
                     String goodID = buttonInfo.getString("good_id");
                     String goodName = buttonInfo.getString("good_name");
                     int number = buttonInfo.getInt("number");
+                    String goodPic = buttonInfo.getString("good_pic");
+                    Double price = buttonInfo.getDouble("price");
 
-                    ButtonCard aButtonCard = new ButtonCard(buttonID, categoryID, categoryName, goodID, goodName, number, getActivity().getApplicationContext(),
+                    ButtonCard aButtonCard = new ButtonCard(buttonID, categoryID, categoryName, goodID, goodName, number, goodPic, price, getActivity().getApplicationContext(),
                             getActivity(), deleteButtonListener);
                     buttonCardList.addView(aButtonCard);
                 }
@@ -68,6 +80,7 @@ public class BuyerButtonFragment extends Fragment {
     ResponseListener deleteButtonListener = new ResponseListener() {
         @Override
         public void callback(String response) throws JSONException {
+            JSONObject jsonObject = API.ResponseShow(getActivity().getApplicationContext(), response);
             initInterface();
         }
     };
@@ -75,29 +88,31 @@ public class BuyerButtonFragment extends Fragment {
 
 
 class ButtonCard extends CardView {
-//    private int buttonID;
+    private int buttonID;
     private int categoryID;
-//    private String categoryName;
+    private String categoryName;
 //    private String goodID;
 //    private String goodName;
-//    private int number;
+    private int number;
     private Activity activity;
 
     private TextView mDeleteButton;
     private TextView mCategoryName;
     private TextView mGoodName;
     private TextView mGoodNumber;
+    private TextView mGoodPrice;
     private ImageView mGoodImg;
 
-    public ButtonCard (final int buttonID, final int categoryID, String categoryName, String goodID, String goodName, int number,
+
+    public ButtonCard (final int buttonID, final int categoryID, String categoryName, String goodID, String goodName, int number, String goodPic, Double price,
                        Context context, final Activity activity, final ResponseListener deleteButtonListener) {
         super(context);
-//        this.buttonID = buttonID;
+        this.buttonID = buttonID;
         this.categoryID = categoryID;
-//        this.categoryName = categoryName;
+        this.categoryName = categoryName;
 //        this.goodID = goodID;
 //        this.goodName = goodName;
-//        this.number = number;
+        this.number = number;
         this.activity = activity;
 
         LayoutInflater.from(context).inflate(R.layout.button_card, this);
@@ -106,9 +121,18 @@ class ButtonCard extends CardView {
         mCategoryName.setText(categoryName);
         mGoodName = findViewById(R.id.good_name);
         mGoodName.setText(goodName);
+        mGoodPrice = findViewById(R.id.good_price);
+        mGoodPrice.setText("¥"+price);
         mGoodNumber = findViewById(R.id.good_number);
         mGoodNumber.setText("数量:" + number);
         mGoodImg = findViewById(R.id.good_img);
+        new ImageThreadTask(goodPic, new OnAsyncImageTaskListener() {
+            @Override
+            public void callback(ImageTaskResponse imageTaskResponse) {
+                Bitmap bitmap = imageTaskResponse.getBitmap();
+                mGoodImg.setImageBitmap(bitmap);
+            }
+        }).execute();
 
         mDeleteButton = findViewById(R.id.delete_button);
         mDeleteButton.setOnClickListener(new OnClickListener() {
@@ -118,7 +142,7 @@ class ButtonCard extends CardView {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                ThreadTask task = API.deleteButton(buttonID, deleteButtonListener);
+                                HttpThreadTask task = API.deleteButton(buttonID, deleteButtonListener);
                                 if (task != null)
                                     task.execute();
                             }
@@ -129,7 +153,7 @@ class ButtonCard extends CardView {
         mCategoryName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
+                HttpThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
                 if (task != null)
                     task.execute();
             }
@@ -138,7 +162,7 @@ class ButtonCard extends CardView {
         mGoodName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
+                HttpThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
                 if (task != null)
                     task.execute();
             }
@@ -147,7 +171,7 @@ class ButtonCard extends CardView {
         mGoodNumber.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
+                HttpThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
                 if (task != null)
                     task.execute();
             }
@@ -156,7 +180,7 @@ class ButtonCard extends CardView {
         mGoodImg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
+                HttpThreadTask task = API.getGoodInCategory(categoryID, checkButtonCategoryListener);
                 if (task != null)
                     task.execute();
             }
@@ -168,6 +192,9 @@ class ButtonCard extends CardView {
         public void callback(String response) throws JSONException {
             Intent intent = new Intent(activity.getApplicationContext(), CategoryGood.class);
             intent.putExtra("category_id", categoryID);
+            intent.putExtra("category_name", categoryName);
+            intent.putExtra("button_id", buttonID);
+            intent.putExtra("number", number);
             activity.startActivity(intent);
         }
     };

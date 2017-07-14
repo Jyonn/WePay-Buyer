@@ -3,7 +3,6 @@ package cn.a6_79.wepay_buyer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +12,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.LoginActivity;
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
-import cn.a6_79.wepay_buyer.R;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class RegisterActivity extends AppCompatActivity {
     @Override
@@ -39,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         mSendCaptchaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.captcha(mPhone.getText().toString(), captchaListener);
+                HttpThreadTask task = API.captcha(mPhone.getText().toString(), captchaListener);
                 if (task != null) {
                     task.execute();
                 }
@@ -49,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.register(
+                HttpThreadTask task = API.register(
                         mPassword.getText().toString(),
                         mCaptcha.getText().toString(),
                         registerListener

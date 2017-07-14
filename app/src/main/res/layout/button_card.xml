@@ -14,8 +14,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shampoo" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_weight="3"
@@ -32,7 +31,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="洗发水"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -53,16 +51,31 @@
                 android:id="@+id/good_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="海飞丝洗发水 丝质柔滑型男女士去屑止痒洗发水750ml" />
-
-            <TextView
-                android:id="@+id/good_number"
+                android:padding="3dp" />
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:gravity="end"
-                android:text="数量：2" />
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/good_price"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/good_number"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:gravity="end" />
+                </TableRow>
+
+            </TableLayout>
+
 
         </LinearLayout>
     </LinearLayout>

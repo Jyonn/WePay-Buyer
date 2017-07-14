@@ -1,6 +1,5 @@
 package cn.a6_79.wepay_buyer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,11 +8,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 
 public class AddBuyerCard extends AppCompatActivity {
@@ -38,7 +36,7 @@ public class AddBuyerCard extends AppCompatActivity {
                 EditText mAddCardNumber = (EditText)findViewById(R.id.add_card_number);
                 String addCardNumber = mAddCardNumber.getText().toString();
                 CheckBox mIsDefaultCard = (CheckBox)findViewById(R.id.is_default_card);
-                ThreadTask task;
+                HttpThreadTask task;
                 if (mIsDefaultCard.isChecked()) {
                      task = API.addCard(addCardNumber, 1, addCardListener);
                 }

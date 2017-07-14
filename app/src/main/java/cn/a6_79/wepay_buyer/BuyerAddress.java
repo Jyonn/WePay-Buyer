@@ -11,7 +11,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 
 public class BuyerAddress extends AppCompatActivity {
     @Override
@@ -20,16 +20,15 @@ public class BuyerAddress extends AppCompatActivity {
         initInterFace();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initInterFace();
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        initInterFace();
+//    }
 
     private void initInterFace () {
         setContentView(R.layout.buyer_address);
-        API.init();
-        ThreadTask task = API.getAddress(getAddressListener);
+        HttpThreadTask task = API.getAddress(getAddressListener);
         if (task != null)
             task.execute();
 

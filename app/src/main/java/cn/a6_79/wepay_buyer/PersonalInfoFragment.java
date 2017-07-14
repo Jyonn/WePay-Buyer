@@ -2,21 +2,22 @@ package cn.a6_79.wepay_buyer;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import cn.a6_79.wepay_buyer.NetPack.ThreadTask;
-
-import static cn.a6_79.wepay_buyer.API.cookie;
+import cn.a6_79.wepay_buyer.NetPack.HttpTask;
+import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.ImageTaskResponse;
+import cn.a6_79.wepay_buyer.NetPack.ImageThreadTask;
+import cn.a6_79.wepay_buyer.NetPack.OnAsyncImageTaskListener;
 
 public class PersonalInfoFragment extends Fragment {
     @Override
@@ -28,16 +29,20 @@ public class PersonalInfoFragment extends Fragment {
         TextView usernameView = view.findViewById(R.id.username);
         usernameView.setText(User.username);
 
-//        TODO:根据url获取网络图片，需要封装getBitmap
-//        ImageView avatarView = view.findViewById(R.id.buyer_avatar);
-//        Uri uri = Uri.parse(User.avatar);
-//        avatarView.setImageURI(uri);
+        final ImageView avatarView = view.findViewById(R.id.buyer_avatar);
+        new ImageThreadTask(User.avatar, new OnAsyncImageTaskListener() {
+            @Override
+            public void callback(ImageTaskResponse imageTaskResponse) {
+                Bitmap bitmap = imageTaskResponse.getBitmap();
+                avatarView.setImageBitmap(bitmap);
+            }
+        }).execute();
 
         TextView mLogout = view.findViewById(R.id.logout_button);
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThreadTask task = API.logout(logoutListener);
+                HttpThreadTask task = API.logout(logoutListener);
                 if (task != null)
                     task.execute();
             }

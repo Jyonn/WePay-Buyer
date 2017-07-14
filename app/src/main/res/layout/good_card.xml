@@ -10,34 +10,31 @@
         android:layout_height="80dp">
 
         <ImageView
-            android:id="@+id/good_img"
+            android:id="@+id/good_card_img"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/shampoo" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/good_name"
+                android:id="@+id/good_card_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="海飞丝洗发水 丝质柔滑型男女士去屑止痒洗发水750ml" />
+                android:padding="3dp" />
 
             <TextView
-                android:id="@+id/good_price"
+                android:id="@+id/good_card_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:gravity="end"
-                android:text="¥55.80" />
+                android:gravity="end" />
 
         </LinearLayout>
     </LinearLayout>

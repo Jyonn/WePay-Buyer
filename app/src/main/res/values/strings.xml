@@ -40,6 +40,9 @@
     <string name="confirm_receipt_button">确认收货</string>
 
     <string name="choose_good">选择商品</string>
-
+    <string name="good_detail_title">商品详情</string>
+    <string name="confirm">确定</string>
+    <string name="a_key_number">一键购买数量：</string>
+    <string name="add_button">添加按钮</string>
 
 </resources>

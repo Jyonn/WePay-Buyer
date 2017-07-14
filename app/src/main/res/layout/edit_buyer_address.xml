@@ -51,18 +51,25 @@
             android:hint="@string/address_input_hint"
             android:maxLines="5"/>
     </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/save_buyer_address"
-        style="@style/ButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:text="@string/save_button"
-        android:textColor="@color/colorText"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <!--TODO:button置于页面最下方-->
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/save_buyer_address"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:text="@string/save_button"
+            android:textColor="@color/colorText"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </LinearLayout>
