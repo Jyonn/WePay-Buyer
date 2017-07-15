@@ -11,6 +11,7 @@
             android:padding="10dp"
             android:background="@color/colorPrimary" >
             <ImageView
+                android:id="@+id/return_personal_info"
                 android:src="@drawable/return_last_white"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -33,26 +34,36 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <RadioButton
-            android:layout_weight="1"
             android:id="@+id/have_delivered"
-            style="@style/order_tab"
-            android:text="@string/have_delivered" />
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            android:textColor="@color/menu"
+            android:text="@string/have_delivered"
+            android:button="@null" />
 
         <RadioButton
-            android:layout_weight="1"
             android:id="@+id/have_ordered"
-            style="@style/order_tab"
-            android:text="@string/have_ordered" />
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            android:textColor="@color/menu"
+            android:text="@string/have_ordered"
+            android:button="@null" />
 
     </RadioGroup>
 
     <FrameLayout
         android:id="@+id/order_content"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
 </LinearLayout>

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
-import cn.a6_79.wepay_buyer.NetPack.HttpTask;
 import cn.a6_79.wepay_buyer.NetPack.HttpThreadTask;
 import cn.a6_79.wepay_buyer.NetPack.ImageTaskResponse;
 import cn.a6_79.wepay_buyer.NetPack.ImageThreadTask;
