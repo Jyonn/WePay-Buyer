@@ -26,14 +26,9 @@ public class UserMainActivity extends Activity implements RadioGroup.OnCheckedCh
         RadioGroup radioGroup = findViewById(R.id.bottom_tab);
         radioGroup.setOnCheckedChangeListener(this);
 
-        Intent intent = getIntent();
-        int defaultID = intent.getIntExtra("default_id", 1);
-        if (defaultID != 1) {
-            findViewById(defaultID).performClick();
-        }
-        else {
-            findViewById(R.id.button_list).performClick();
-        }
+
+        findViewById(R.id.button_list).performClick();
+
     }
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

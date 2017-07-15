@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
             JSONObject jsonObject = API.ResponseShow(getApplicationContext(), response);
             JSONObject body = jsonObject.getJSONObject("body");
             if (body != null) {
-                EditText usernameText = (EditText) findViewById(R.id.login_username);
+                EditText usernameText = (EditText) findViewById(R.id.register_username);
                 EditText passwordText = (EditText) findViewById(R.id.register_password);
                 String username = usernameText.getText().toString();
                 String password = passwordText.getText().toString();
