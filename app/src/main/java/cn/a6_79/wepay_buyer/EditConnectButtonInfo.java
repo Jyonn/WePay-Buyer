@@ -1,6 +1,8 @@
 package cn.a6_79.wepay_buyer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,7 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
@@ -24,6 +27,7 @@ import java.util.Scanner;
 
 
 public class EditConnectButtonInfo extends AppCompatActivity {
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +75,20 @@ public class EditConnectButtonInfo extends AppCompatActivity {
 
     private void saveInfo(String wifiAccountText, String wifiPasswordText) throws JSONException, IOException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("UserID", User.username);
+        jsonObject.put("UserID", User.userID);
         jsonObject.put("SSID", wifiAccountText);
         jsonObject.put("PWD", wifiPasswordText);
 
-        FileOutputStream fileWirte;
-        PrintStream printStream;
-
-        fileWirte = super.openFileOutput("info.json", EditConnectButtonInfo.MODE_PRIVATE);
-        printStream = new PrintStream(fileWirte);
-        printStream.print(jsonObject.toString());
-        fileWirte.close();
-        printStream.close();
+        File filePath;
+        this.context = this;
+        filePath = new File(context.getExternalFilesDir(null), "info.json");
+        try {
+            FileWriter fWriter;
+            fWriter = new FileWriter(filePath,false);
+            fWriter.write(jsonObject.toString());
+            fWriter.flush();
+        }catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

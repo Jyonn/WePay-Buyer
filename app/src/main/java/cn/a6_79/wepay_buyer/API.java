@@ -54,7 +54,7 @@ public class API {
         apis.add(new APITag(EDIT_BUTTON, PUT, "/button/<0>"));
         apis.add(new APITag(DELETE_BUTTON, DELETE, "/button/<0>"));
         apis.add(new APITag(GET_BUTTON, GET, "/button"));
-        apis.add(new APITag(GET_ORDER, GET, "/order?status=<0>&page=<1>&count=<2>"));
+        apis.add(new APITag(GET_ORDER, GET, "/order?status=<0>"));
         apis.add(new APITag(RECEIVE, PUT, "/order/<0>/status"));
     }
 
@@ -96,14 +96,11 @@ public class API {
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
         return new HttpThreadTask(httpTaskRequest, commonListener.httpListener);
     }
-    static HttpThreadTask getOrder(String status, int page, int count, ResponseListener listener) {
+    static HttpThreadTask getOrder(String status, ResponseListener listener) {
         APITag apiTag = find(GET_ORDER);
         if (apiTag == null)
             return null;
-        String url = apiTag.url.
-                replace("<0>", status).
-                replace("<1>", String.valueOf(page)).
-                replace("<2>", String.valueOf(count));
+        String url = apiTag.url.replace("<0>", status);
         CommonListener commonListener = new CommonListener(listener);
         HttpTaskRequest httpTaskRequest = new HttpTaskRequest(host + url, apiTag.method, "{}", cookie);
         return new HttpThreadTask(httpTaskRequest, commonListener.httpListener);

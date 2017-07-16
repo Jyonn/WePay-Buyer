@@ -1,5 +1,6 @@
 package cn.a6_79.wepay_buyer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ConnectButtonInfo extends AppCompatActivity {
+
+    private Context context;
     @Override
     protected void onResume() {
         super.onResume();
@@ -41,12 +44,12 @@ public class ConnectButtonInfo extends AppCompatActivity {
         JSONObject getFileContent;
         try {
             getFileContent = readInfo();
-            if (getFileContent == null || !getFileContent.getString("UserID").equals(User.username)) {
+            if (getFileContent == null || !getFileContent.get("UserID").equals(User.userID)) {
                 mWifiAccount.setText("请设置wifi账号");
                 mWifiPassword.setText("请设置wifi密码");
             } else {
-                String wifiAccount = getFileContent.getString("SSID");
-                String wifiPassword = getFileContent.getString("PWD");
+                String wifiAccount = (String)getFileContent.get("SSID");
+                String wifiPassword = (String)getFileContent.get("PWD");
                 mWifiAccount.setText(wifiAccount);
                 mWifiPassword.setText(wifiPassword);
             }
@@ -80,15 +83,23 @@ public class ConnectButtonInfo extends AppCompatActivity {
     }
 
     private JSONObject readInfo() throws IOException, ParseException, JSONException {
-        FileInputStream fileRead;
-        Scanner scan;
-        StringBuffer stringBuffer = new StringBuffer();
-        fileRead = super.openFileInput("info.json");
-        scan = new Scanner(fileRead);
-        while (scan.hasNext()) {
-            stringBuffer.append(scan.next());
+        File filePath;
+        this.context = this;
+        filePath = new File(context.getExternalFilesDir(null), "info.json");
+        try {
+            if(filePath.exists()) {
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(new FileReader(filePath));
+                JSONObject jsonObj = (JSONObject) obj;
+                return jsonObj;
+            }
+            else{
+                return null;
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        String str = stringBuffer.toString();
-        return (new JSONObject(str));
+        return null;
     }
 }
