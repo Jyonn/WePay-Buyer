@@ -79,6 +79,15 @@ public class PersonalInfoFragment extends Fragment {
                 startActivity(new Intent(getActivity().getApplicationContext(), ConnectButtonInfo.class));
             }
         });
+
+        TableRow mConnectNFC = view.findViewById(R.id.connect_nfc);
+        mConnectNFC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity().getApplicationContext(), ConnectNFC.class));
+            }
+        });
+
         return view;
     }
 

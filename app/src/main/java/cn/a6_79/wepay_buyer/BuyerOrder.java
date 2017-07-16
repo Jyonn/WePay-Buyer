@@ -23,7 +23,7 @@ public class BuyerOrder extends Activity implements RadioGroup.OnCheckedChangeLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buyer_order_view);
 
-        ImageView mReturnImage = (ImageView)findViewById(R.id.return_personal_info);
+        ImageView mReturnImage = (ImageView) findViewById(R.id.return_personal_info);
         mReturnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

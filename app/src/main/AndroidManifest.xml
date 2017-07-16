@@ -14,7 +14,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/shopping_cart"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -40,6 +40,7 @@
         <activity android:name=".BuyerOrder" />
         <activity android:name=".ConnectButtonInfo" />
         <activity android:name=".EditConnectButtonInfo" />
+        <activity android:name=".ConnectNFC" />
         <activity android:name=".ChooseGood" />
         <activity android:name=".CategoryGood" />
         <activity android:name=".GoodDetail" />

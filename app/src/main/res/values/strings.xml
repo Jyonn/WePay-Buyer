@@ -45,4 +45,6 @@
     <string name="a_key_number">一键购买数量：</string>
     <string name="add_button">添加按钮</string>
 
+    <string name="connect_nfc">NFC感应区</string>
+
 </resources>

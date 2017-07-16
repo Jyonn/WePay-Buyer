@@ -106,7 +106,7 @@ class OrderedOrderCard extends CardView {
         this.activity = activity;
         this.price = totalPrice/number;
 
-        LayoutInflater.from(context).inflate(R.layout.button_card, this);
+        LayoutInflater.from(context).inflate(R.layout.have_ordered_order_card, this);
         orderedOrderImage = findViewById(R.id.ordered_order_img);
         orderedOrderGoodName = findViewById(R.id.ordered_order_goodName);
         orderedOrderGoodPrice = findViewById(R.id.ordered_order_goodPrice);

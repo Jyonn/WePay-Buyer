@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:paddingRight="10dp"
         android:text="@string/logout_text"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp" />
@@ -133,6 +134,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_connect_info"
+                android:textColor="@color/menu"
+                android:textSize="20sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/connect_nfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextField" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:src="@drawable/connect_nfc" />
+
+            <TextView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/connect_nfc"
                 android:textColor="@color/menu"
                 android:textSize="20sp" />
 

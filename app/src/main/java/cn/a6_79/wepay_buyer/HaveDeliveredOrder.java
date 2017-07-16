@@ -54,12 +54,13 @@ public class HaveDeliveredOrder extends Fragment {
         @Override
         public void callback(String response) throws JSONException {
             JSONObject jsonObject = API.ResponseShow(getActivity().getApplicationContext(), response);
-            JSONArray body = jsonObject.getJSONArray("body");
+            JSONObject body = jsonObject.getJSONObject("body");
+            JSONArray order_list = body.getJSONArray("order_list");
             LinearLayout deliveredOrderCardList = getView().findViewById(R.id.delivered_order_list);
             deliveredOrderCardList.removeAllViews();
-            if (body != null) {
-                for (int i = 0; i < body.length(); i++) {
-                    JSONObject orderInfo = body.getJSONObject(i);
+            if (order_list != null) {
+                for (int i = 0; i < order_list.length(); i++) {
+                    JSONObject orderInfo = order_list.getJSONObject(i);
                     int orderID = orderInfo.getInt("order_id");
                     String goodName =  orderInfo.getString("good_name");
                     String realName = orderInfo.getString("real_name");
@@ -117,7 +118,7 @@ class DeliveredOrderCard extends CardView {
         this.activity = activity;
         this.price = totalPrice/number;
 
-        LayoutInflater.from(context).inflate(R.layout.button_card, this);
+        LayoutInflater.from(context).inflate(R.layout.have_delivered_order_card, this);
         deliveredOrderImage = findViewById(R.id.delivered_order_img);
         deliveredOrderGoodName = findViewById(R.id.delivered_order_goodName);
         deliveredOrderGoodPrice = findViewById(R.id.delivered_order_goodPrice);
